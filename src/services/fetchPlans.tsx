@@ -14,6 +14,28 @@ const getBackendUrl = () => {
 
 const getToken = async () => cookies.get("token") || "";
 
+type PlanArchiveResponse = {
+  success: boolean;
+  id: string;
+};
+
+const parsePlanError = async (response: Response, fallbackMessage: string) => {
+  try {
+    const data = (await response.json()) as { message?: string | string[] };
+    const message = Array.isArray(data.message)
+      ? data.message.join(", ")
+      : data.message;
+
+    throw new Error(message || fallbackMessage);
+  } catch (error) {
+    if (error instanceof Error && error.message !== fallbackMessage) {
+      throw error;
+    }
+
+    throw new Error(fallbackMessage);
+  }
+};
+
 export const FfetchPlans = async (): Promise<Plan[]> => {
   try {
     const backendUrl = getBackendUrl();
@@ -38,14 +60,24 @@ export const FfetchPlans = async (): Promise<Plan[]> => {
 export const FupdatePlan = async (plan: Partial<Plan>): Promise<Plan> => {
   const token = await getToken();
   const backendUrl = getBackendUrl();
-  const response = await fetch(`${backendUrl}/plans/update/${plan.id}`, {
-    method: "PUT",
+  const { id, ...payload } = plan;
+
+  if (!id) {
+    throw new Error("No se encontró el identificador del plan a actualizar");
+  }
+
+  const response = await fetch(`${backendUrl}/plans/update/${id}`, {
+    method: "PATCH",
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(plan),
+    body: JSON.stringify(payload),
   });
+
+  if (!response.ok) {
+    await parsePlanError(response, "No se pudo actualizar el plan");
+  }
 
   return response.json();
 };
@@ -62,12 +94,16 @@ export const FcreatePlan = async (plan: IcreatePlan): Promise<Plan> => {
     body: JSON.stringify(plan),
   });
 
+  if (!response.ok) {
+    await parsePlanError(response, "No se pudo crear el plan");
+  }
+
   return response.json();
 };
 
-export const FdeletePlan = async (plan: Plan): Promise<Plan> => {
+export const FdeletePlan = async (plan: Plan): Promise<PlanArchiveResponse> => {
   const token = await getToken();
-  const { id, ...rest } = plan;
+  const { id } = plan;
   const backendUrl = getBackendUrl();
   const response = await fetch(`${backendUrl}/plans/delete/${id}`, {
     method: "DELETE",
@@ -75,8 +111,11 @@ export const FdeletePlan = async (plan: Plan): Promise<Plan> => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify(rest),
   });
+
+  if (!response.ok) {
+    await parsePlanError(response, "No se pudo archivar el plan");
+  }
 
   return response.json();
 };

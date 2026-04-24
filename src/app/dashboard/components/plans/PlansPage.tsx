@@ -52,7 +52,9 @@ export function PlansPage() {
       await createPlan(newPlan);
       toast.success("Plan creado exitosamente");
     } catch (error) {
-      toast.error("Error al crear el plan");
+      toast.error(
+        error instanceof Error ? error.message : "Error al crear el plan",
+      );
       throw error;
     }
   };
@@ -77,7 +79,9 @@ export function PlansPage() {
       await updatePlan(updatedPlan);
       toast.success("Plan actualizado exitosamente");
     } catch (error) {
-      toast.error("Error al actualizar el plan");
+      toast.error(
+        error instanceof Error ? error.message : "Error al actualizar el plan",
+      );
       throw error;
     }
   };
@@ -112,7 +116,7 @@ export function PlansPage() {
         setEditingPlan(null);
         setIsCreateDialogOpen(false);
       } catch {
-        toast.error("Error al procesar el formulario");
+        // El mensaje específico ya se muestra en el submit correspondiente.
       }
     },
   });
@@ -120,9 +124,11 @@ export function PlansPage() {
   const handleDelete = async (plan: Plan) => {
     try {
       await deletePlan(plan);
-      toast.success("Plan eliminado exitosamente");
-    } catch {
-      toast.error("Error al eliminar el plan");
+      toast.success("Plan archivado exitosamente");
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : "Error al archivar el plan",
+      );
     }
   };
 

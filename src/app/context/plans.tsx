@@ -23,18 +23,16 @@ export const PlansProvider = ({ children }: { children: React.ReactNode }) => {
   const [plans, setPlans] = useState<Plan[]>([]);
 
   async function createPlan(plan: IcreatePlan) {
-    try {
-      const res = await FcreatePlan(plan);
-      if (!res) return null;
-      setPlans((currentPlans) => [...currentPlans, res]);
-    } catch {
-      return null;
-    }
+    const res = await FcreatePlan(plan);
+    if (!res) return null;
+
+    setPlans((currentPlans) => [...currentPlans, res]);
   }
 
   async function deletePlan(plan: Plan) {
     const res = await FdeletePlan(plan);
     if (!res) return null;
+
     setPlans((currentPlans) =>
       currentPlans.filter((currentPlan) => currentPlan.id !== plan.id),
     );
@@ -43,6 +41,7 @@ export const PlansProvider = ({ children }: { children: React.ReactNode }) => {
   async function updatePlan(plan: Plan) {
     const res = await FupdatePlan(plan);
     if (!res) return null;
+
     setPlans((currentPlans) =>
       currentPlans.map((currentPlan) =>
         currentPlan.id === plan.id ? res : currentPlan,
