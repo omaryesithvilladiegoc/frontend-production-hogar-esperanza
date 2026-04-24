@@ -26,7 +26,7 @@ export const UserContext = createContext<IUserContextType>({
   user: null,
   isLogin: false,
   signIn: async () => null,
-  signOut: async () => false,
+  signOut: async () => {},
   sendFormContact: async () => null,
 });
 
