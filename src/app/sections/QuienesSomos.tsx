@@ -101,7 +101,7 @@ export default function QuienesSomos() {
                 rotateY: 8,
                 y: -10,
               }}
-              className="feature-card group cursor-pointer text-center transform-gpu"
+              className="feature-card group cursor-pointer text-center transform-gpu text-emerald-900 mb-6"
             >
               <div className="w-24 h-24 mx-auto mb-6 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
                 <feature.icon
@@ -111,11 +111,11 @@ export default function QuienesSomos() {
                 />
               </div>
 
-              <h3 className="text-white text-xl font-semibold mb-2">
+              <h3 className="text-xl font-semibold mb-2 text-emerald-900 mb-6">
                 {feature.title}
               </h3>
 
-              <p className="text-white/70 text-sm">
+              <p className="text-sm text-emerald-900 mb-6">
                 {feature.description}
               </p>
             </motion.div>

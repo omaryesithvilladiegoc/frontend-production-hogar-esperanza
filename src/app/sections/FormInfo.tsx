@@ -108,6 +108,7 @@ export default function Contacto() {
         className="relative mb-[100px] overflow-hidden bg-gradient-to-b from-[#011B12]/80 to-white pt-[100px]"
       >
         <div className="absolute inset-0">
+          <div className="absolute inset-0 h-full w-full rounded-[4rem] bg-cover bg-center" style={{ backgroundImage: 'url(https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096338/IMG_8962_uwmonm.webp)', backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center' }} />
           <div className="absolute inset-0 h-full w-full rounded-[4rem] bg-[radial-gradient(circle_at_top,rgba(120,255,214,0.24),transparent_30%),linear-gradient(160deg,rgba(2,27,18,0.94),rgba(6,58,40,0.78)_52%,rgba(2,27,18,0.9))]" />
           <div className="absolute inset-0 h-full w-full rounded-[4rem] bg-[linear-gradient(90deg,rgba(255,255,255,0.06),transparent_22%,rgba(255,255,255,0.03)_52%,transparent_80%)]" />
         </div>

@@ -51,11 +51,11 @@ export default function Footer() {
               transition={{ duration: 0.6, delay: 0.1 }}
               className="text-center lg:text-left"
             >
-              <div className={`mb-6 italic tracking-wide ${borel.className} font-sans`}>
-                <h3 className="text-3xl text-white italic">
+              <div className={`mb-6 tracking-wide ${borel.className} font-sans`}>
+                <h3 className="text-3xl text-white">
                   hogar
                 </h3>
-                <h3 className="text-3xl text-white italic -mt-1">
+                <h3 className="text-3xl text-white -mt-1">
                   esperanza
                 </h3>
               </div>

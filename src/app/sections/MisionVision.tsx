@@ -8,7 +8,7 @@ export default function MisionVision() {
       {/* Background Image - Se añade suppressHydrationWarning por el style dinámico */}
       <div className="absolute inset-0 overflow-hidden rounded-[4rem] border-4 border-[var(--color-brand-mint)]">
         <Image
-          src="https://res.cloudinary.com/dbzbkk9l6/image/upload/v1772976199/IMG_5912_1_1_p2wul6.webp"
+          src="https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096342/IMG_8964_x57esp.webp"
           alt="Background"
           width={1920}
           height={1080}
@@ -24,7 +24,7 @@ export default function MisionVision() {
       />
       
       {/* Green Overlay */}
-      <div  className="absolute inset-0 rounded-[4rem] "  />
+      <div className="absolute inset-0 rounded-[4rem] bg-black/30 backdrop-blur-sm" />
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden" >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
