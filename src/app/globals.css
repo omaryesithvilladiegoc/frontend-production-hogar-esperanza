@@ -91,7 +91,7 @@
 :root {
   --navbar-safe-offset: 0px;
   --navbar-safe-offset-mobile: clamp(5.5rem, 8vw, 7rem);
-  --color-brand-mint: #35e2a8;
+  --color-brand-mint: #2cf0af;
   --color-primary: #10b981;
   --color-primary-dark: #059669;
   --color-primary-light: #34d399;

@@ -33,7 +33,6 @@ const imagePool = [
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096322/IMG_5442_i7zxe2.webp",
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096322/IMG_3711_1_nhdthq.webp",
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096322/IMG_3705_xu9htj.webp",
-  "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096319/IMG_3666_1_bl4nka.webp",
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096318/IMG_3278_q5dsqa.webp",
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096317/IMG_2879_ksm4he.webp",
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096314/IMG_2158_fynytq.webp",
