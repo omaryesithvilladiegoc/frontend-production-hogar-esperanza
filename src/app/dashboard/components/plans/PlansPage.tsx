@@ -1,9 +1,14 @@
-import { useMemo, useState } from 'react';
-import { Plus, CreditCard, ListChecks, Image as ImageIcon } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { useFormik } from 'formik';
-import { DashboardHeader } from '../dashboard/DashboardHeader';
-import { PlanCard } from './PlanCard';
+import { useMemo, useState } from "react";
+import {
+  Plus,
+  CreditCard,
+  ListChecks,
+  Image as ImageIcon,
+} from "lucide-react";
+import { motion } from "framer-motion";
+import { useFormik } from "formik";
+import { DashboardHeader } from "../dashboard/DashboardHeader";
+import { PlanCard } from "./PlanCard";
 import {
   Dialog,
   DialogContent,
@@ -11,13 +16,13 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Plan } from '../../types/index.types';
-import { usePlansContext } from '@/app/context/plans';
-import { toast } from 'sonner';
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Plan } from "../../types/index.types";
+import { usePlansContext } from "@/app/context/plans";
+import { toast } from "sonner";
 
 interface PlanFormValues {
   title: string;
@@ -25,20 +30,17 @@ interface PlanFormValues {
   features: string;
 }
 
-
-
 export function PlansPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false);
   const [editingPlan, setEditingPlan] = useState<Plan | null>(null);
   const { plans, createPlan, deletePlan, updatePlan } = usePlansContext();
 
-  // 🟢 CREATE
   const handleCreateSubmit = async (values: PlanFormValues) => {
     const parsedFeatures = values.features
-      .split('\n')
-      .map((f) => f.trim())
-      .filter((f) => f.length > 0)
-      .map((f) => ({ description: f }));
+      .split("\n")
+      .map((feature) => feature.trim())
+      .filter((feature) => feature.length > 0)
+      .map((feature) => ({ description: feature }));
 
     const newPlan = {
       title: values.title.trim(),
@@ -48,24 +50,21 @@ export function PlansPage() {
 
     try {
       await createPlan(newPlan);
-      toast.success('Plan creado exitosamente');
+      toast.success("Plan creado exitosamente");
     } catch (error) {
-      console.error(error);
-      toast.error('Error al crear el plan');
+      toast.error("Error al crear el plan");
       throw error;
     }
   };
 
-  // 🔵 UPDATE
   const handleUpdateSubmit = async (values: PlanFormValues) => {
     if (!editingPlan) return;
-    console.log(values);
-    
+
     const parsedFeatures = values.features
-      .split('\n')
-      .map((f) => f.trim())
-      .filter((f) => f.length > 0)
-      .map((f) => ({ description: f }));
+      .split("\n")
+      .map((feature) => feature.trim())
+      .filter((feature) => feature.length > 0)
+      .map((feature) => ({ description: feature }));
 
     const updatedPlan = {
       id: editingPlan.id,
@@ -76,10 +75,9 @@ export function PlansPage() {
 
     try {
       await updatePlan(updatedPlan);
-      toast.success('Plan actualizado exitosamente');
+      toast.success("Plan actualizado exitosamente");
     } catch (error) {
-      console.error(error);
-      toast.error('Error al actualizar el plan');
+      toast.error("Error al actualizar el plan");
       throw error;
     }
   };
@@ -87,16 +85,17 @@ export function PlansPage() {
   const formik = useFormik<PlanFormValues>({
     enableReinitialize: true,
     initialValues: {
-      title: editingPlan?.title || '',
-      image: editingPlan?.image || '',
+      title: editingPlan?.title || "",
+      image: editingPlan?.image || "",
       features:
-        editingPlan?.features?.map((f) => f.description).join('\n') || '',
+        editingPlan?.features?.map((feature) => feature.description).join("\n") ||
+        "",
     },
     validate: (values) => {
       const errors: Partial<Record<keyof PlanFormValues, string>> = {};
 
       if (!values.title.trim()) {
-        errors.title = 'El nombre del plan es obligatorio';
+        errors.title = "El nombre del plan es obligatorio";
       }
 
       return errors;
@@ -112,9 +111,8 @@ export function PlansPage() {
         resetForm();
         setEditingPlan(null);
         setIsCreateDialogOpen(false);
-      } catch (error) {
-        console.error(error);
-        toast.error('Error al procesar el formulario');
+      } catch {
+        toast.error("Error al procesar el formulario");
       }
     },
   });
@@ -122,10 +120,9 @@ export function PlansPage() {
   const handleDelete = async (plan: Plan) => {
     try {
       await deletePlan(plan);
-      toast.success('Plan eliminado exitosamente');
-    } catch (error) {
-      console.error(error);
-      toast.error('Error al eliminar el plan');
+      toast.success("Plan eliminado exitosamente");
+    } catch {
+      toast.error("Error al eliminar el plan");
     }
   };
 
@@ -164,7 +161,7 @@ export function PlansPage() {
       />
 
       <main className="p-6 lg:p-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
           {plans.map((plan, index) => (
             <PlanCard
               key={plan.id}
@@ -180,30 +177,40 @@ export function PlansPage() {
               setEditingPlan(null);
               setIsCreateDialogOpen(true);
             }}
-            className="bg-gray-50 rounded-2xl p-6 border-2 border-dashed cursor-pointer flex flex-col items-center justify-center min-h-[400px]"
+            className="flex min-h-[400px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-gray-50 p-6"
           >
-            <Plus className="w-8 h-8 text-gray-400" />
+            <Plus className="h-8 w-8 text-gray-400" />
             <h3>Crear Nuevo Plan</h3>
           </motion.div>
         </div>
 
-        <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <SummaryCard title="Total de Planes" value={plans.length} icon={CreditCard} />
-          <SummaryCard title="Total de Características" value={totalFeatures} icon={ListChecks} />
-          <SummaryCard title="Planes con Imagen" value={plansWithImage} icon={ImageIcon} />
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
+          <SummaryCard
+            title="Total de Planes"
+            value={plans.length}
+            icon={CreditCard}
+          />
+          <SummaryCard
+            title="Total de Características"
+            value={totalFeatures}
+            icon={ListChecks}
+          />
+          <SummaryCard
+            title="Planes con Imagen"
+            value={plansWithImage}
+            icon={ImageIcon}
+          />
         </div>
       </main>
 
       <Dialog open={isCreateDialogOpen} onOpenChange={handleCloseDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>
-              {editingPlan ? 'Editar Plan' : 'Crear Plan'}
-            </DialogTitle>
+            <DialogTitle>{editingPlan ? "Editar Plan" : "Crear Plan"}</DialogTitle>
             <DialogDescription>
               {editingPlan
-                ? 'Modifica los detalles del plan.'
-                : 'Crea un nuevo plan.'}
+                ? "Modifica los detalles del plan."
+                : "Crea un nuevo plan."}
             </DialogDescription>
           </DialogHeader>
 
@@ -232,7 +239,7 @@ export function PlansPage() {
                 name="features"
                 value={formik.values.features}
                 onChange={formik.handleChange}
-                className="w-full border p-2 rounded"
+                className="w-full rounded border p-2"
               />
             </div>
 
@@ -241,7 +248,7 @@ export function PlansPage() {
                 Cancelar
               </Button>
               <Button type="submit">
-                {editingPlan ? 'Actualizar' : 'Crear'}
+                {editingPlan ? "Actualizar" : "Crear"}
               </Button>
             </DialogFooter>
           </form>
@@ -251,9 +258,17 @@ export function PlansPage() {
   );
 }
 
-function SummaryCard({ title, value, icon: Icon }: any) {
+function SummaryCard({
+  title,
+  value,
+  icon: Icon,
+}: {
+  title: string;
+  value: number;
+  icon: React.ComponentType<{ className?: string }>;
+}) {
   return (
-    <div className="bg-white p-4 rounded-xl">
+    <div className="rounded-xl bg-white p-4">
       <Icon />
       <p>{title}</p>
       <p>{value}</p>

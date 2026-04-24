@@ -83,8 +83,7 @@ export default function Contacto() {
       }
 
       setDialogOpen(true);
-    } catch (error) {
-      console.error("Servidor caido:", error);
+    } catch {
       setDialogTitle("Servidor no disponible");
       setDialogMessage("El servidor no esta disponible en este momento.");
       setDialogOpen(true);
@@ -109,14 +108,8 @@ export default function Contacto() {
         className="relative mb-[100px] overflow-hidden bg-gradient-to-b from-[#011B12]/80 to-white pt-[100px]"
       >
         <div className="absolute inset-0">
-          <div
-            className="absolute inset-0 h-full w-full rounded-[4rem] bg-cover bg-no-repeat"
-            style={{
-              backgroundImage:
-                "url(https://res.cloudinary.com/dbzbkk9l6/image/upload/v1772996246/Rectangle_34_1_i6sod3.webp)",
-              backgroundPosition: "center",
-            }}
-          />
+          <div className="absolute inset-0 h-full w-full rounded-[4rem] bg-[radial-gradient(circle_at_top,rgba(120,255,214,0.24),transparent_30%),linear-gradient(160deg,rgba(2,27,18,0.94),rgba(6,58,40,0.78)_52%,rgba(2,27,18,0.9))]" />
+          <div className="absolute inset-0 h-full w-full rounded-[4rem] bg-[linear-gradient(90deg,rgba(255,255,255,0.06),transparent_22%,rgba(255,255,255,0.03)_52%,transparent_80%)]" />
         </div>
 
         <div className="relative z-10 w-full px-4 py-20 sm:px-6 md:py-28 lg:px-8 xl:px-12">

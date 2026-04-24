@@ -12,10 +12,7 @@ const getBackendUrl = () => {
   return urlBack.replace(/\/+$/, "");
 };
 
-const getToken = async () => {
-  const token = cookies.get("token") || "";
-  return token
-}
+const getToken = async () => cookies.get("token") || "";
 
 export const FfetchPlans = async (): Promise<Plan[]> => {
   try {
@@ -33,70 +30,53 @@ export const FfetchPlans = async (): Promise<Plan[]> => {
     }
 
     return await response.json();
-  } catch (error) {
-    console.error("Error en fetchPlans:", error);
-
-    // 🔴 En vez de romper, devuelves algo controlado
+  } catch {
     return [];
   }
 };
 
 export const FupdatePlan = async (plan: Partial<Plan>): Promise<Plan> => {
   const token = await getToken();
-  try {
-    const backendUrl = getBackendUrl();
-    const response = await fetch(`${backendUrl}/plans/update/${plan.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify(plan),
-    });
-    const data = await response.json();
-    return data
-  } catch (error) {
-    console.error("Error de red o servidor caído:", error);
-    return plan as Plan
-  }
-}
+  const backendUrl = getBackendUrl();
+  const response = await fetch(`${backendUrl}/plans/update/${plan.id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(plan),
+  });
+
+  return response.json();
+};
 
 export const FcreatePlan = async (plan: IcreatePlan): Promise<Plan> => {
   const token = await getToken();
-  try {
-    const backendUrl = getBackendUrl();
-    const response = await fetch(`${backendUrl}/plans`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify(plan),
-    });
-    const data = await response.json();
-    return data
-  } catch (error) {
-    throw error
-  }
-}
+  const backendUrl = getBackendUrl();
+  const response = await fetch(`${backendUrl}/plans`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(plan),
+  });
+
+  return response.json();
+};
 
 export const FdeletePlan = async (plan: Plan): Promise<Plan> => {
   const token = await getToken();
   const { id, ...rest } = plan;
-  try {
-    const backendUrl = getBackendUrl();
-    const response = await fetch(`${backendUrl}/plans/delete/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${token}`,
-      },
-      body: JSON.stringify(rest),
-    });
-    const data = await response.json();
-    return data
-  } catch (error) {
-    console.error("Error de red o servidor caído:", error);
-    throw error
-  }
-}
+  const backendUrl = getBackendUrl();
+  const response = await fetch(`${backendUrl}/plans/delete/${id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(rest),
+  });
+
+  return response.json();
+};

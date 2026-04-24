@@ -113,9 +113,9 @@ const LoginScreen = () => {
       <div className="absolute inset-0 z-0 ">
         <div className="absolute inset-0 bg-gradient-to-b from-background-light/80 via-background-light/40 to-background-light/90 z-10"></div>
         <img
-          alt="Smiling elderly people in a garden"
+          alt="Adultos mayores en Hogar Esperanza"
           className="w-full h-full object-cover grayscale-[20%] opacity-40"
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuAKy4QvUbr0nMmIAGDExTpZeGRczUY2t9RRpDQzs-8I0PgDM7UnzgvUtWisPUdumxIoKzP9MNZYSYNBZOsEeNvthygrHWvod2m1S1Uttn-HfjDn_u7bLfVDepN1SUQOb-_EiP9wrqsEP22B4lpC1xnbfHXhLHVJuwhkoyRj8vmnIpBtHLEyOsuaai6AwBNZ_VrekPIE064MZnyh77ZkdTbgEff5uH7Thbc1ljadIW7MGnNFvSgG4FIDxMFcc5z62BcWm5ysoFyvEw"
+          src="https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096318/IMG_3278_q5dsqa.webp"
           referrerPolicy="no-referrer"
         />
       </div>

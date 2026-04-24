@@ -42,7 +42,7 @@ interface IUserContextType {
   user: Partial<IUserResponse> | null,
   isLogin: boolean,
   signIn: (user: ILoginUser) => Promise<ILoginResponse | null>,
-  signOut: () => void,
+  signOut: () => Promise<void>,
   sendFormContact: (formData: IUsersForm) => Promise<IFormContactResponse | null>
 }
 

@@ -19,7 +19,7 @@ const slides = [
   },
   {
     id: 3,
-    image: 'https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096315/IMG_2791_y6jo5x.webp',
+    image: 'https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096293/IMG_1917_gfyuyx.webp',
     alt: 'Cuidado de adultos mayores',
   },
   {
@@ -29,7 +29,7 @@ const slides = [
   },
   {
     id: 5,
-    image: 'https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096313/IMG_2093_gnhili.webp',
+    image: 'https://res.cloudinary.com/dbzbkk9l6/image/upload/v1773096292/IMG_1905_y1782q.webp',
     alt: 'Adultos mayores felices',
   },
   {

@@ -1,10 +1,9 @@
-"use client"
-import { Users, FileText, CreditCard, TrendingUp } from 'lucide-react';
-import { ActivityChart } from '../charts/ActivityChart';
-import { DashboardHeader } from './DashboardHeader';
-import { StatsCard } from './StatsCard';
-import { dashboardStats } from '../../data/mockData';
-import { RecentActivity } from './RecentActivity';
+"use client";
+import { Users, FileText, CreditCard, TrendingUp } from "lucide-react";
+import { DashboardHeader } from "./DashboardHeader";
+import { StatsCard } from "./StatsCard";
+import { dashboardStats } from "../../data/mockData";
+import { RecentActivity } from "./RecentActivity";
 
 export function DashboardOverview() {
   return (
@@ -12,12 +11,11 @@ export function DashboardOverview() {
       <DashboardHeader
         title="Dashboard"
         subtitle="Bienvenido de vuelta, Admin"
-        onSearch={(query: any) => console.log('Search:', query)}
+        onSearch={() => {}}
       />
 
       <main className="p-6 lg:p-8">
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-8">
+        <div className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
           <StatsCard
             title="Total Usuarios"
             value={Number(dashboardStats.totalUsers)}
@@ -29,7 +27,7 @@ export function DashboardOverview() {
           <StatsCard
             title="Total Posts"
             value={Number(dashboardStats.totalPosts)}
-            change={8.2}  
+            change={8.2}
             icon={FileText}
             color="gold"
             delay={0.1}
@@ -52,21 +50,14 @@ export function DashboardOverview() {
           />
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          {/* Chart - Takes 2 columns on large screens */}
-          <div className="xl:col-span-2">
-            
-          </div>
-
-          {/* Recent Activity */}
+        <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
+          <div className="xl:col-span-2" />
           <div className="xl:col-span-1">
             <RecentActivity />
           </div>
         </div>
 
-        {/* Quick Actions */}
-        <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
           <QuickActionCard
             title="Gestionar Posts"
             description="Crear, editar o eliminar publicaciones"
@@ -98,14 +89,19 @@ interface QuickActionCardProps {
   onClick: () => void;
 }
 
-function QuickActionCard({ title, description, action, onClick }: QuickActionCardProps) {
+function QuickActionCard({
+  title,
+  description,
+  action,
+  onClick,
+}: QuickActionCardProps) {
   return (
-    <div className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
+    <div className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-shadow hover:shadow-md">
       <h4 className="font-semibold text-[#111111]">{title}</h4>
-      <p className="text-sm text-[#6E6E6E] mt-1">{description}</p>
+      <p className="mt-1 text-sm text-[#6E6E6E]">{description}</p>
       <button
         onClick={onClick}
-        className="mt-4 text-sm font-medium text-[#D4A03A] hover:text-[#B88A2F] transition-colors"
+        className="mt-4 text-sm font-medium text-[#D4A03A] transition-colors hover:text-[#B88A2F]"
       >
         {action} →
       </button>

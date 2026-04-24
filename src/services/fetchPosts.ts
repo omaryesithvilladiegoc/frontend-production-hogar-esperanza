@@ -64,8 +64,7 @@ export const FfetchPosts = async (): Promise<IPost[]> => {
       },
       ...getPublicFetchOptions(["posts"]),
     });
-  } catch (error) {
-    console.error("No se pudieron obtener los posts publicos.", error);
+  } catch {
     return [];
   }
 
@@ -89,8 +88,7 @@ export const FfetchPostById = async (postId: string): Promise<IPost | null> => {
       },
       ...getPublicFetchOptions(["posts", `post-${postId}`]),
     });
-  } catch (error) {
-    console.error(`No se pudo obtener el post ${postId}.`, error);
+  } catch {
     return null;
   }
 

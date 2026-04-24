@@ -1,6 +1,14 @@
 "use client";
 
-import { createContext, useState, ReactNode, useContext } from "react";
+import {
+  createContext,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+  ReactNode,
+  useContext,
+} from "react";
 import {
   IFormContactResponse,
   IUserContextType,
@@ -11,6 +19,8 @@ import {
 import { FsendFormContact, FsignIn, FlogOut } from "@/services/fetchUsers";
 import Cookies from "js-cookie";
 import { useRouter } from "next/navigation";
+import { clearClientSession, SESSION_TIMEOUT_MS } from "@/lib/session";
+import { toast } from "sonner";
 
 export const UserContext = createContext<IUserContextType>({
   user: null,
@@ -24,6 +34,7 @@ export const useUserContext = () => useContext(UserContext);
 
 export const UserProvider = ({ children }: { children: ReactNode }) => {
   const router = useRouter();
+  const idleTimeoutRef = useRef<number | null>(null);
   const [user, setUser] = useState<Partial<IUserResponse> | null>(() => {
     if (typeof window === "undefined") return null;
 
@@ -50,6 +61,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     localStorage.setItem("token", res.token);
     Cookies.set("token", res.token, {
       expires: 7,
+      path: "/",
       secure: true,
       sameSite: "strict",
     });
@@ -64,14 +76,27 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     return res;
   };
 
-  const logOut = async () => {
-    await FlogOut();
-    localStorage.removeItem("token");
-    Cookies.remove("token");
+  const logOut = useCallback(async (options?: { silent?: boolean }) => {
+    try {
+      await FlogOut();
+    } catch {
+      // El cierre local debe continuar aunque falle el backend.
+    }
+
+    if (idleTimeoutRef.current) {
+      window.clearTimeout(idleTimeoutRef.current);
+      idleTimeoutRef.current = null;
+    }
+
+    await clearClientSession();
     router.push("/login");
     setUser(null);
     setIsLogin(false);
-  };
+
+    if (!options?.silent) {
+      toast.info("Sesion cerrada");
+    }
+  }, [router]);
 
   const sendFormContact = async (
     formData: IUsersForm,
@@ -84,6 +109,49 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
       return null;
     }
   };
+
+  useEffect(() => {
+    if (!isLogin || typeof window === "undefined") return;
+
+    const resetIdleTimer = () => {
+      if (idleTimeoutRef.current) {
+        window.clearTimeout(idleTimeoutRef.current);
+      }
+
+      idleTimeoutRef.current = window.setTimeout(() => {
+        void logOut({ silent: true });
+        toast.info("Sesion finalizada por inactividad", {
+          description: "Vuelve a iniciar sesion para continuar.",
+        });
+      }, SESSION_TIMEOUT_MS);
+    };
+
+    const activityEvents: Array<keyof WindowEventMap> = [
+      "mousemove",
+      "mousedown",
+      "keydown",
+      "scroll",
+      "touchstart",
+      "click",
+    ];
+
+    activityEvents.forEach((eventName) => {
+      window.addEventListener(eventName, resetIdleTimer, { passive: true });
+    });
+
+    resetIdleTimer();
+
+    return () => {
+      activityEvents.forEach((eventName) => {
+        window.removeEventListener(eventName, resetIdleTimer);
+      });
+
+      if (idleTimeoutRef.current) {
+        window.clearTimeout(idleTimeoutRef.current);
+        idleTimeoutRef.current = null;
+      }
+    };
+  }, [isLogin, logOut]);
 
   return (
     <UserContext.Provider

@@ -54,38 +54,25 @@ export const PostsProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       const createdPost = await FcreatePost(payload);
-      const uploadErrors: string[] = [];
 
       if (mainImage) {
         try {
           await FuploadPostMainImage(createdPost.id, mainImage);
-        } catch (error) {
-          uploadErrors.push(
-            error instanceof Error
-              ? error.message
-              : "No se pudo actualizar la imagen principal",
-          );
+        } catch {
+          // El post ya fue creado; evitamos marcarlo como error total por una subida accesoria.
         }
       }
 
       if (extraImages.length) {
         try {
           await FuploadPostExtraImages(createdPost.id, extraImages);
-        } catch (error) {
-          uploadErrors.push(
-            error instanceof Error
-              ? error.message
-              : "No se pudieron actualizar las imagenes adicionales",
-          );
+        } catch {
+          // El post ya fue creado; evitamos marcarlo como error total por una subida accesoria.
         }
       }
 
       const refreshedPosts = await FfetchPosts();
       setPosts(refreshedPosts);
-
-      if (uploadErrors.length) {
-        throw new Error(uploadErrors.join(". "));
-      }
 
       return (
         refreshedPosts.find((post) => post.id === createdPost.id) ?? createdPost
@@ -118,38 +105,25 @@ export const PostsProvider = ({ children }: { children: React.ReactNode }) => {
 
     try {
       await FupdatePost(postId, payload);
-      const uploadErrors: string[] = [];
 
       if (mainImage) {
         try {
           await FuploadPostMainImage(postId, mainImage);
-        } catch (error) {
-          uploadErrors.push(
-            error instanceof Error
-              ? error.message
-              : "No se pudo actualizar la imagen principal",
-          );
+        } catch {
+          // El post base ya fue actualizado.
         }
       }
 
       if (extraImages.length) {
         try {
           await FuploadPostExtraImages(postId, extraImages);
-        } catch (error) {
-          uploadErrors.push(
-            error instanceof Error
-              ? error.message
-              : "No se pudieron actualizar las imagenes adicionales",
-          );
+        } catch {
+          // El post base ya fue actualizado.
         }
       }
 
       const refreshedPosts = await FfetchPosts();
       setPosts(refreshedPosts);
-
-      if (uploadErrors.length) {
-        throw new Error(uploadErrors.join(". "));
-      }
 
       return refreshedPosts.find((post) => post.id === postId) ?? null;
     } finally {
@@ -158,9 +132,7 @@ export const PostsProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   useEffect(() => {
-    refreshPosts().catch((error) => {
-      console.error("Error fetching posts:", error);
-    });
+    void refreshPosts();
   }, []);
 
   return (

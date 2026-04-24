@@ -1,10 +1,13 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { IcreatePlan, Plan} from "@/app/dashboard/types/index.types";
-import { FcreatePlan, FdeletePlan, FfetchPlans, FupdatePlan } from "@/services/fetchPlans";
+import { IcreatePlan, Plan } from "@/app/dashboard/types/index.types";
+import {
+  FcreatePlan,
+  FdeletePlan,
+  FfetchPlans,
+  FupdatePlan,
+} from "@/services/fetchPlans";
 import { PlansContextType } from "@/interfaces/interfaces";
-
-
 
 export const PlansContext = createContext<PlansContextType>({
   plans: [],
@@ -23,55 +26,50 @@ export const PlansProvider = ({ children }: { children: React.ReactNode }) => {
     try {
       const res = await FcreatePlan(plan);
       if (!res) return null;
-      console.log("Plan created:", res);
-      setPlans([...plans, res]);
-    } catch (error) {
-      console.error("Error creating plan:", error);
+      setPlans((currentPlans) => [...currentPlans, res]);
+    } catch {
       return null;
     }
   }
 
   async function deletePlan(plan: Plan) {
-    try {
-      const res = await FdeletePlan(plan);
-      if (!res) return null;
-      console.log("Plan deleted:", res);
-      setPlans(plans.filter((p) => p.id !== plan.id));
-    } catch (error) {
-      console.error("Error deleting plan:", error);
-      throw error;
-    }
-  }
-  
- async function getPlans() {
-    try {
-      const res = await FfetchPlans();
-      if (!res) return null;
-      console.log("Plans fetched:", res);
-      setPlans(res);
-    } catch (error) {
-      console.error("Error fetching plans:", error);
-      return null;
-    }
+    const res = await FdeletePlan(plan);
+    if (!res) return null;
+    setPlans((currentPlans) =>
+      currentPlans.filter((currentPlan) => currentPlan.id !== plan.id),
+    );
   }
 
   async function updatePlan(plan: Plan) {
-    try {
-      const res = await FupdatePlan(plan);
-      if (!res) return null;
-      console.log("Plan updated:", res);
-      setPlans(plans.map((p) => (p.id === plan.id ? res : p)));
-    } catch (error) {
-      console.error("Error updating plan:", error);
-      throw error;
-    }
+    const res = await FupdatePlan(plan);
+    if (!res) return null;
+    setPlans((currentPlans) =>
+      currentPlans.map((currentPlan) =>
+        currentPlan.id === plan.id ? res : currentPlan,
+      ),
+    );
   }
 
   useEffect(() => {
-    getPlans();
+    let isMounted = true;
+
+    const loadPlans = async () => {
+      try {
+        const res = await FfetchPlans();
+        if (!isMounted || !res) return;
+        setPlans(res);
+      } catch {
+        // No bloqueamos la UI si falla la carga inicial.
+      }
+    };
+
+    void loadPlans();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
- 
   return (
     <PlansContext.Provider
       value={{
@@ -86,4 +84,3 @@ export const PlansProvider = ({ children }: { children: React.ReactNode }) => {
     </PlansContext.Provider>
   );
 };
-
