@@ -9,11 +9,11 @@ interface ParentComponentProps {
 
 const ParentComponent: React.FC<ParentComponentProps> = ({ children, color }) => {
   const path = usePathname();
-  if (path === "/") {
-    
-  }
-    return (
-    <div className={path.includes("/blog") ? `bg-[${color}]` :"bg-white"}>
+  const isBlogDetailPage = path.startsWith("/blog/");
+  const backgroundColor = isBlogDetailPage ? "#041b13" : color;
+
+  return (
+    <div style={{ backgroundColor }}>
       {children}
     </div>
   );

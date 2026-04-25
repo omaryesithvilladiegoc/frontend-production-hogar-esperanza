@@ -3,7 +3,6 @@ import {
   IPost,
   IUpdatePostPayload,
 } from "@/interfaces/interfaces";
-import { getPublicFetchOptions } from "@/lib/fetch-cache";
 
 const urlBack = process.env.NEXT_PUBLIC_BACKEND_URL?.trim();
 
@@ -62,7 +61,7 @@ export const FfetchPosts = async (): Promise<IPost[]> => {
       headers: {
         "Content-Type": "application/json",
       },
-      ...getPublicFetchOptions(["posts"]),
+      cache: "no-store",
     });
   } catch {
     return [];
@@ -86,7 +85,7 @@ export const FfetchPostById = async (postId: string): Promise<IPost | null> => {
       headers: {
         "Content-Type": "application/json",
       },
-      ...getPublicFetchOptions(["posts", `post-${postId}`]),
+      cache: "no-store",
     });
   } catch {
     return null;

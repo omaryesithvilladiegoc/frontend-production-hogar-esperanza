@@ -8,9 +8,7 @@ export default function PageLayout({
   return (
     <div className="page-layout">
       <Navbar />
-      <div className="pt-[var(--navbar-safe-offset-mobile)] md:pt-0">
-        {children}
-      </div>
+      <div>{children}</div>
     </div>
   );
 }

@@ -19,7 +19,7 @@ import {
 } from "@/components/ui/carousel"
 
 import "../globals.css"
-import { useRouter } from "next/navigation"
+import { WHATSAPP_DONATION_URL } from "@/lib/contact"
 
 const testimonials = [
   {
@@ -62,22 +62,11 @@ const containerVariants = {
   },
 }
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 40, scale: 0.9 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 0.6,
-      ease: [0.25, 0.1, 0.25, 1],
-    },
-  },
-}
-
 export default function Testimonios() {
   const [selected, setSelected] = useState<typeof testimonials[0] | null>(null)
-  const router = useRouter()
+  const openDonationWhatsApp = () => {
+    window.open(WHATSAPP_DONATION_URL, "_blank", "noopener,noreferrer")
+  }
   return (
     <div>
       <section className=" relative py-16 md:py-24 bg-gradient-to-b from-[#078158] to-[#011B12]/80 overflow-hidden">
@@ -139,7 +128,7 @@ export default function Testimonios() {
                     <div className="testimonial-card-overlay">
                       <div className="w-full">
                         <p className="text-white/80 text-sm mb-2 italic opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                          "{testimonial.quote}"
+                          &ldquo;{testimonial.quote}&rdquo;
                         </p>
 
                         <h3 className="text-white text-xl md:text-2xl font-semibold">
@@ -181,7 +170,7 @@ export default function Testimonios() {
               <motion.button
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.95 }}
-                onClick={() => router.push("/donaciones")}
+                onClick={openDonationWhatsApp}
                 className="px-8 py-3 rounded-full bg-white text-emerald-600 font-semibold hover:bg-emerald-50 transition-colors duration-300 shadow-lg"
               >
                 Donar ahora

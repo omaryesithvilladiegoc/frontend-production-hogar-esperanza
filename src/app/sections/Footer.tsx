@@ -1,36 +1,45 @@
-"use client"
-import { motion } from 'framer-motion';
-import {MapComponent} from './components/mapa/Map';
-import { usePathname } from 'next/navigation';
-import { borel } from '@/fonts';
+"use client";
+
+import { motion } from "framer-motion";
+import { usePathname } from "next/navigation";
+import { borel } from "@/fonts";
+import { MapComponent } from "./components/mapa/Map";
+import {
+  WHATSAPP_DISPLAY_PHONE,
+  WHATSAPP_DONATION_URL,
+} from "@/lib/contact";
 
 const menuLinks = [
-  { label: 'Quienes somos', href: '#quienes-somos' },
-  { label: 'Planes', href: '#servicios' },
-  { label: 'Instalaciones', href: '#instalaciones' },
-  { label: 'Sé parte de una historia', href: '#como-ayudar' },
-  { label: 'Contáctanos', href: '#contactanos' },
-  { label: 'Galería', href: '#blog' },
-  { label: 'Blog', href: '#' },
+  { label: "Quienes somos", href: "#quienes-somos" },
+  { label: "Planes", href: "#servicios" },
+  { label: "Instalaciones", href: "#instalaciones" },
+  { label: "Se parte de una historia", href: "#como-ayudar" },
+  { label: "Contactanos", href: "#contactanos" },
+  { label: "Galeria", href: "#blog" },
+  { label: "Blog", href: "#" },
 ];
 
 const politicasLinks = [
-  { label: 'Políticas de privacidad', href: '#' },
-  { label: 'Términos y condiciones', href: '#' },
-  { label: 'Términos de uso', href: '#' },
-  { label: 'Políticas de Cookies', href: '#' },
+  { label: "Politicas de privacidad", href: "#" },
+  { label: "Terminos y condiciones", href: "#" },
+  { label: "Terminos de uso", href: "#" },
+  { label: "Politicas de Cookies", href: "#" },
 ];
 
 export default function Footer() {
-  const path = usePathname()
+  const path = usePathname();
 
-  if(path === '/mapa') return
+  if (path === "/mapa") return null;
+
   return (
-    <footer className={`bg-[#15803D] pt-16 pb-6 rounded-t-[4rem] ${path === '/login' ? 'translate-y-[-120px]' : ''} relative z-20`}>
+    <footer
+      className={`relative z-20 rounded-t-[4rem] bg-[#15803D] pb-6 pt-16 ${
+        path === "/login" ? "translate-y-[-120px]" : ""
+      }`}
+    >
       <div className="w-full px-4 sm:px-6 lg:px-8 xl:px-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
-            {/* Map */}
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -38,12 +47,11 @@ export default function Footer() {
               transition={{ duration: 0.6 }}
               className="lg:col-span-1"
             >
-              <div className="rounded-3xl bg-white/10 w-full">
+              <div className="w-full rounded-3xl bg-white/10">
                 <MapComponent />
               </div>
             </motion.div>
 
-            {/* Logo */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -52,29 +60,24 @@ export default function Footer() {
               className="text-center lg:text-left"
             >
               <div className={`mb-6 tracking-wide ${borel.className} font-sans`}>
-                <h3 className="text-3xl text-white">
-                  hogar
-                </h3>
-                <h3 className="text-3xl text-white -mt-1">
-                  esperanza
-                </h3>
+                <h3 className="text-3xl text-white">hogar</h3>
+                <h3 className="-mt-1 text-3xl text-white">esperanza</h3>
               </div>
             </motion.div>
 
-            {/* Menu */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h4 className="text-white font-semibold text-lg mb-4">Menú</h4>
+              <h4 className="mb-4 text-lg font-semibold text-white">Menu</h4>
               <ul className="space-y-2">
                 {menuLinks.map((link) => (
                   <li key={link.label}>
                     <a
                       href={link.href}
-                      className="text-white/80 hover:text-white transition-colors text-sm"
+                      className="text-sm text-white/80 transition-colors hover:text-white"
                     >
                       {link.label}
                     </a>
@@ -83,22 +86,23 @@ export default function Footer() {
               </ul>
             </motion.div>
 
-            {/* Políticas y Contacto */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-8"
+              className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-1"
             >
               <div>
-                <h4 className="text-white font-semibold text-lg mb-4">Políticas</h4>
+                <h4 className="mb-4 text-lg font-semibold text-white">
+                  Politicas
+                </h4>
                 <ul className="space-y-2">
                   {politicasLinks.map((link) => (
                     <li key={link.label}>
                       <a
                         href={link.href}
-                        className="text-white/80 hover:text-white transition-colors text-sm"
+                        className="text-sm text-white/80 transition-colors hover:text-white"
                       >
                         {link.label}
                       </a>
@@ -108,18 +112,28 @@ export default function Footer() {
               </div>
 
               <div>
-                <h4 className="text-white font-semibold text-lg mb-4">Contacto</h4>
-                <ul className="space-y-2 text-white/80 text-sm">
+                <h4 className="mb-4 text-lg font-semibold text-white">
+                  Contacto
+                </h4>
+                <ul className="space-y-2 text-sm text-white/80">
                   <li>Calle 24 # 15 - 90</li>
-                  <li>Barrio Costa de oro</li>
-                  <li>Montería, Córdoba, Colombia</li>
-                  <li>3013743729</li>
+                  <li>Barrio Costa de Oro</li>
+                  <li>Monteria, Cordoba, Colombia</li>
+                  <li>
+                    <a
+                      href={WHATSAPP_DONATION_URL}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 transition-colors hover:text-white"
+                    >
+                      {WHATSAPP_DISPLAY_PHONE}
+                    </a>
+                  </li>
                 </ul>
               </div>
             </motion.div>
           </div>
 
-          {/* Copyright */}
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -127,8 +141,9 @@ export default function Footer() {
             transition={{ duration: 0.6, delay: 0.4 }}
             className="border-t border-white/20 pt-6 text-center"
           >
-            <p className="text-white/70 text-sm">
-              Copyright © 2026 Fundación Hogar Esperanza. Todos los derechos reservados.
+            <p className="text-sm text-white/70">
+              Copyright © 2026 Fundacion Hogar Esperanza. Todos los derechos
+              reservados.
             </p>
           </motion.div>
         </div>

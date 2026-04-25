@@ -1,8 +1,8 @@
 "use client"
 import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
-import { useRouter } from 'next/navigation';
 import { borel } from '@/fonts';
+import { WHATSAPP_DONATION_URL } from '@/lib/contact';
 export interface HeroProps {
   scrollToSection: (sectionId: string) => void;
 }
@@ -46,7 +46,9 @@ const slides = [
 
 export default function Hero({ scrollToSection }: HeroProps) {
   const [currentSlide, setCurrentSlide] = useState(0);
-  const router = useRouter();
+  const openDonationWhatsApp = () => {
+    window.open(WHATSAPP_DONATION_URL, "_blank", "noopener,noreferrer");
+  };
 
   const nextSlide = useCallback(() => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -139,7 +141,7 @@ export default function Hero({ scrollToSection }: HeroProps) {
           <motion.button
             whileHover={{ scale: 1.05, y: -2 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => router.push('/donaciones')}
+            onClick={openDonationWhatsApp}
             suppressHydrationWarning
             className="px-8 py-3 rounded-full bg-white/20 border-2 border-white text-white font-medium hover:bg-white hover:text-emerald-600 transition-all duration-300 backdrop-blur-sm min-w-[160px]"
           >

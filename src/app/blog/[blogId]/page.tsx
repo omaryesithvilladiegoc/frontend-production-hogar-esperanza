@@ -1,8 +1,8 @@
+
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { borel } from "@/fonts";
 import {
   buildAbsoluteUrl,
   buildPostDescription,
@@ -94,6 +94,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPost({ params }: Props) {
   const { blogId } = await params;
   const post = await FfetchPostById(blogId);
+  
+
+ 
 
   if (!post) return notFound();
 
@@ -120,8 +123,8 @@ export default async function BlogPost({ params }: Props) {
 
         <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-10 pt-8 sm:px-6 lg:px-8 lg:pb-14">
           <Link
-            href="/blog"
-            className="inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-sm font-medium text-white/[0.88] transition hover:border-white/30 hover:bg-white/10 hover:text-white"
+           href="/blog"
+            className="z-10000 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-sm font-medium text-white/[0.88] transition hover:border-white/30 hover:bg-white/10 hover:text-white"
           >
             <span aria-hidden="true">&larr;</span>
             Volver al blog
@@ -195,10 +198,10 @@ export default async function BlogPost({ params }: Props) {
           <div className="rounded-[2rem] border border-white/8 bg-[#071f16] p-6 sm:p-8 lg:p-10">
             <div className="mb-8 flex items-center justify-between gap-4 border-b border-white/8 pb-6">
               <div>
-                <p className={`text-3xl text-[var(--color-brand-mint)] ${borel.className}`}>
+                <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-brand-mint)]">
                   Relato completo
                 </p>
-                <h2 className="mt-1 text-2xl font-semibold text-white sm:text-3xl">
+                <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
                   Cada detalle del acompanamiento importa
                 </h2>
               </div>
@@ -222,10 +225,6 @@ export default async function BlogPost({ params }: Props) {
                     Momentos que acompanaron esta historia
                   </h2>
                 </div>
-                <p className="max-w-xl text-sm leading-7 text-white/65">
-                  Estas imagenes complementan el articulo y ayudan a contar de
-                  forma mas cercana la experiencia vivida en Hogar Esperanza.
-                </p>
               </div>
 
               <div className="grid gap-4 md:grid-cols-12">
