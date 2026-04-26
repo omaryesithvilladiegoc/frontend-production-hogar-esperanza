@@ -305,7 +305,7 @@ export default function Navbar({
         {/* LOGO */}
         {phase !== "form-newslatter" && (
           <motion.button
-            onClick={onClickNewsletter}
+          onClick={() => router.push('/')}
             className="p-2 rounded-full hover:bg-emerald-100"
           >
             <Image
