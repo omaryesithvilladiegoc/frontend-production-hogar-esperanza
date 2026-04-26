@@ -177,8 +177,8 @@ export function PostsPage() {
             </DialogTitle>
             <DialogDescription>
               {isEditing
-                ? 'Actualiza el contenido del post, sus imagenes y el tamano del grid.'
-                : 'Crea una nueva publicacion.'}
+                ? 'Actualiza el contenido del post, sus imágenes y el tamaño del grid.'
+                : 'Crea una nueva publicación.'}
             </DialogDescription>
           </DialogHeader>
 
@@ -305,7 +305,7 @@ export function PostsPage() {
             </div>
 
             <div>
-              <Label>Tamano del grid</Label>
+              <Label>Tamaño del grid</Label>
               <Input
                 type="number"
                 min="1"

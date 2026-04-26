@@ -20,7 +20,7 @@ const navItems = [
   { id: "contacto", label: "Contacto" },
   { id: "apoyar", label: "Apoyar" },
   { id: "instalaciones", label: "Instalaciones" },
-  { id: "galeria", label: "Galeria" },
+  { id: "galeria", label: "Galería" },
   { id: "mapa", label: "Mapa" },
 ];
 
@@ -197,7 +197,7 @@ export default function Navbar({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.3, delay: index * 0.1 }}
-                    className={`px-2 py-1.5 md:py-2 rounded-full text-[12px] font-medium ${
+                    className={`px-2 py-1.5 md:py-2 rounded-full text-[12px] font-medium cursor-pointer ${
                       activeSection === item.id
                         ? "bg-emerald-600 text-white"
                         : "text-emerald-600 hover:bg-emerald-100 hover:text-emerald-800"
@@ -224,7 +224,7 @@ export default function Navbar({
                     setIsExpanded(true);
                     setRounded("rounded-full");
                   }}
-                  className="shadow-md p-1 rounded-full bg-[var(--color-brand-mint)] text-white"
+                  className="shadow-md p-1 cursor-pointer rounded-full bg-[var(--color-brand-mint)] text-white"
                 >
                   <X size={18} />
                 </button>
@@ -240,7 +240,7 @@ export default function Navbar({
                     className="px-3 py-2 border rounded-xl"
                   />
 
-                  <button className="bg-emerald-600 text-white px-4 py-2 rounded-xl">
+                  <button className="bg-emerald-600 text-white px-4 py-2 rounded-xl cursor-pointer">
                     Suscribirse
                   </button>
                 </div>
@@ -285,7 +285,7 @@ export default function Navbar({
                       key={item.id}
                       layout
                       onClick={() => handleClick(item.id)}
-                       className={`px-2 py-1.5 md:py-2 rounded-full flex items-center justify-center text-[12px] text-center w-full font-medium ${
+                       className={`px-2 py-1.5 md:py-2 rounded-full flex items-center justify-center text-[12px] text-center w-full font-medium cursor-pointer ${
                       activeSection === item.id
                         ? "bg-emerald-600 text-white"
                         : "text-emerald-600 hover:bg-emerald-100 hover:text-emerald-800"
@@ -313,7 +313,7 @@ export default function Navbar({
               alt="Logo"
               width={40}
               height={40}
-              className="w-10 h-10 object-contain"
+              className="w-10 h-10 object-contain cursor-pointer"
             />
           </motion.button>
         )}

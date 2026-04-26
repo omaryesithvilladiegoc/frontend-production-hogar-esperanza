@@ -94,7 +94,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
     setIsLogin(false);
 
     if (!options?.silent) {
-      toast.info("Sesion cerrada");
+      toast.info("Sesión cerrada");
     }
   }, [router]);
 
@@ -120,8 +120,8 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
 
       idleTimeoutRef.current = window.setTimeout(() => {
         void logOut({ silent: true });
-        toast.info("Sesion finalizada por inactividad", {
-          description: "Vuelve a iniciar sesion para continuar.",
+        toast.info("Sesión finalizada por inactividad", {
+          description: "Vuelve a iniciar sesión para continuar.",
         });
       }, SESSION_TIMEOUT_MS);
     };

@@ -1,4 +1,3 @@
-
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
@@ -94,9 +93,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function BlogPost({ params }: Props) {
   const { blogId } = await params;
   const post = await FfetchPostById(blogId);
-  
-
- 
 
   if (!post) return notFound();
 
@@ -123,7 +119,7 @@ export default async function BlogPost({ params }: Props) {
 
         <div className="relative mx-auto flex max-w-7xl flex-col gap-8 px-4 pb-10 pt-8 sm:px-6 lg:px-8 lg:pb-14">
           <Link
-           href="/blog"
+            href="/blog"
             className="z-10000 inline-flex w-fit items-center gap-2 rounded-full border border-white/15 bg-white/[0.06] px-4 py-2 text-sm font-medium text-white/[0.88] transition hover:border-white/30 hover:bg-white/10 hover:text-white"
           >
             <span aria-hidden="true">&larr;</span>
@@ -133,7 +129,7 @@ export default async function BlogPost({ params }: Props) {
           <div className="grid items-end gap-8 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="max-w-3xl">
               <p className="mb-4 text-xs font-semibold uppercase tracking-[0.35em] text-[var(--color-brand-mint)]">
-                Historias que acompanamos con cuidado
+                Historias que acompañamos con cuidado
               </p>
 
               <h1 className="text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
@@ -154,7 +150,8 @@ export default async function BlogPost({ params }: Props) {
                   Lectura de {estimatedReadTime} min
                 </span>
                 <span className="rounded-full border border-white/15 bg-white/[0.06] px-4 py-2">
-                  {galleryImages.length} imagen{galleryImages.length === 1 ? "" : "es"}
+                  {galleryImages.length} imagen
+                  {galleryImages.length === 1 ? "" : "es"}
                 </span>
               </div>
             </div>
@@ -187,7 +184,7 @@ export default async function BlogPost({ params }: Props) {
           {post.header ? (
             <div className="rounded-[2rem] border border-white/10 bg-white/[0.05] p-6 shadow-[0_20px_60px_rgba(0,0,0,0.16)] sm:p-8">
               <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-brand-mint)]">
-                Introduccion
+                Introducción
               </p>
               <p className="mt-4 text-xl leading-9 text-white/90 sm:text-2xl">
                 {post.header}
@@ -202,7 +199,7 @@ export default async function BlogPost({ params }: Props) {
                   Relato completo
                 </p>
                 <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                  Cada detalle del acompanamiento importa
+                  Cada detalle del acompañamiento importa
                 </h2>
               </div>
             </div>
@@ -219,10 +216,10 @@ export default async function BlogPost({ params }: Props) {
               <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
                 <div>
                   <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-brand-mint)]">
-                    Galeria visual
+                    Galería visual
                   </p>
                   <h2 className="mt-2 text-2xl font-semibold text-white sm:text-3xl">
-                    Momentos que acompanaron esta historia
+                    Momentos que acompañaron esta historia
                   </h2>
                 </div>
               </div>
@@ -267,9 +264,11 @@ export default async function BlogPost({ params }: Props) {
                       </div>
 
                       <figcaption className="absolute inset-x-0 bottom-0 flex items-center justify-between gap-3 p-4 text-sm text-white/[0.8]">
-                        <span>Registro visual {String(index + 1).padStart(2, "0")}</span>
+                        <span>
+                          Registro visual {String(index + 1).padStart(2, "0")}
+                        </span>
                         <span className="rounded-full border border-white/15 bg-black/20 px-3 py-1 text-xs uppercase tracking-[0.24em]">
-                          {index === 0 ? "Portada" : "Galeria"}
+                          {index === 0 ? "Portada" : "Galería"}
                         </span>
                       </figcaption>
                     </figure>
@@ -298,10 +297,10 @@ export default async function BlogPost({ params }: Props) {
           <div className="overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.05] shadow-[0_20px_60px_rgba(0,0,0,0.18)]">
             <div className="border-b border-white/10 px-6 py-5">
               <p className="text-sm uppercase tracking-[0.32em] text-[var(--color-brand-mint)]">
-                Resumen del articulo
+                Resumen del artículo
               </p>
               <h2 className="mt-2 text-2xl font-semibold text-white">
-                Claves de esta publicacion
+                Claves de esta publicación
               </h2>
             </div>
 
@@ -318,7 +317,7 @@ export default async function BlogPost({ params }: Props) {
                   Tono del contenido
                 </p>
                 <p className="mt-2 text-base leading-7 text-white/[0.78]">
-                  Una mirada cercana al bienestar, la compania y el cuidado que
+                  Una mirada cercana al bienestar, la compañía y el cuidado que
                   sostienen la vida diaria de nuestros residentes.
                 </p>
               </div>
@@ -350,7 +349,7 @@ export default async function BlogPost({ params }: Props) {
                 </p>
                 <p className="mt-2 text-base leading-7 text-white/[0.82]">
                   Seguimos compartiendo historias reales, aprendizajes y
-                  momentos que reflejan una vejez acompanada con dignidad y
+                  momentos que reflejan una vejez acompañada con dignidad y
                   afecto.
                 </p>
               </div>

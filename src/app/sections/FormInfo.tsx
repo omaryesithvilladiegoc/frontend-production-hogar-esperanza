@@ -47,7 +47,7 @@ export default function Contacto() {
     e.preventDefault();
 
     if (Date.now() - formStartedAt < 1500 || formData.website.trim()) {
-      setDialogTitle("Solicitud no valida");
+      setDialogTitle("Solicitud no válida");
       setDialogMessage(
         "Por favor intenta nuevamente completando el formulario de forma manual.",
       );
@@ -71,21 +71,21 @@ export default function Contacto() {
         setDialogTitle("Mensaje enviado");
         setDialogMessage(
           response.message ||
-            "Gracias por contactarnos. Te responderemos pronto, por favor revisa tu correo electronico.",
+            "Gracias por contactarnos. Te responderemos pronto; por favor revisa tu correo electrónico.",
         );
         resetFormData();
       } else {
         setDialogTitle("Error");
         setDialogMessage(
           response?.message ||
-            "Ocurrio un error al enviar el formulario. Por favor, intentalo de nuevo.",
+            "Ocurrió un error al enviar el formulario. Por favor, inténtalo de nuevo.",
         );
       }
 
       setDialogOpen(true);
     } catch {
       setDialogTitle("Servidor no disponible");
-      setDialogMessage("El servidor no esta disponible en este momento.");
+      setDialogMessage("El servidor no está disponible en este momento.");
       setDialogOpen(true);
     } finally {
       setLoading(false);
@@ -123,12 +123,12 @@ export default function Contacto() {
                 transition={{ duration: 0.6 }}
               >
                 <h2 className="mb-6 text-3xl font-bold text-white text-shadow md:text-4xl lg:text-5xl">
-                  Contactanos
+                  Contáctanos
                 </h2>
 
                 <p className="max-w-lg text-sm leading-relaxed text-white/90 text-shadow md:text-base">
-                  Contactanos hoy mismo para obtener mas informacion sobre
-                  nuestros servicios y programas disenados para mejorar la
+                  Contáctanos hoy mismo para obtener más información sobre
+                  nuestros servicios y programas diseñados para mejorar la
                   calidad de vida de los adultos mayores.
                 </p>
               </motion.div>
@@ -164,7 +164,7 @@ export default function Contacto() {
                     <input
                       type="email"
                       name="email"
-                      placeholder="Correo electronico"
+                      placeholder="Correo electrónico"
                       value={formData.email}
                       onChange={handleChange}
                       className="w-full rounded-full border-2 border-white/50 bg-white/10 px-5 py-3.5 text-white placeholder-white/70 focus:border-white focus:outline-none"
@@ -174,7 +174,7 @@ export default function Contacto() {
                     <input
                       type="tel"
                       name="telefono"
-                      placeholder="Telefono o WhatsApp"
+                      placeholder="Teléfono o WhatsApp"
                       value={formData.telefono}
                       onChange={handleChange}
                       className="w-full rounded-full border-2 border-white/50 bg-white/10 px-5 py-3.5 text-white placeholder-white/70 focus:border-white focus:outline-none"

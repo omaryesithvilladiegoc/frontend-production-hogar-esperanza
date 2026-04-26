@@ -42,7 +42,7 @@ export default function App() {
           </h1>
 
           <p className="mx-auto max-w-xl text-lg font-light leading-relaxed text-white/90 md:text-xl">
-            Cada aporte, grande o pequeno, se transforma en cuidado, compania y
+            Cada aporte, grande o pequeño, se transforma en cuidado, compañía y
             bienestar para nuestros abuelitos.
           </p>
         </motion.header>
@@ -77,11 +77,11 @@ export default function App() {
 
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold md:text-3xl">
-              Si prefieres hacer la donacion directamente:
+              Si prefieres hacer la donación directamente:
             </h2>
 
             <p className="mx-auto max-w-lg text-base font-light text-white/80 md:text-lg">
-              Tambien puedes escribirnos por WhatsApp.
+              También puedes escribirnos por WhatsApp.
             </p>
 
             <a

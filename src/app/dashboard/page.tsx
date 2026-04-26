@@ -19,7 +19,7 @@ const SimpleComponent: React.FC<SimpleComponentProps> = ({ message = 'Hello Worl
   const renderPage = () => {
     switch (currentPage) {
       case 'dashboard':
-        return <div className="text-center text-2xl font-bold text-primary flex justify-center items-center h-[calc(100vh-120px)]">Pagina en construcción, deberias navegar a los posts <button onClick={() => setCurrentPage('posts')} className="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-all cursor-pointer m-4">Posts</button> </div>;
+        return <div className="text-center text-2xl font-bold text-primary flex justify-center items-center h-[calc(100vh-120px)]">Página en construcción, deberías navegar a los posts <button onClick={() => setCurrentPage('posts')} className="bg-primary text-white font-bold py-2 px-4 rounded-lg hover:bg-primary/90 transition-all cursor-pointer m-4">Posts</button> </div>;
       case 'posts':
         return <PostsPage />;
       // case 'users':

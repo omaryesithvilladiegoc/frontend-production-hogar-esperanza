@@ -80,7 +80,7 @@ function createGallery(images: string[], startIndex = 0): GalleryImage[] {
 
   return layout.map((item, i) => ({
     src: images[(startIndex + i) % images.length],
-    alt: `Imagen de la galeria ${i + 1}`,
+    alt: `Imagen de la galería ${i + 1}`,
     gridClass: item.gridClass,
   }))
 }
@@ -102,7 +102,7 @@ export default function Gallery() {
     <div className="min-h-screen bg-white flex flex-col">
       <main className="flex-1 px-4 py-8 sm:px-6 md:py-12 lg:px-8 xl:px-12">
         <h1 className="mb-8 text-center text-2xl font-bold text-emerald-600 sm:text-3xl md:mb-12 md:text-4xl lg:text-5xl">
-          Aqui tambien se vive, se rie y se disfruta.
+          Aquí también se vive, se ríe y se disfruta.
         </h1>
 
         <div className="hidden max-w-6xl mx-auto auto-rows-[200px] grid-cols-4 gap-4 md:grid">
@@ -156,7 +156,7 @@ export default function Gallery() {
           className="w-[96vw] max-w-6xl overflow-hidden rounded-[2rem] border border-white/12 bg-[linear-gradient(180deg,rgba(5,36,26,0.96)_0%,rgba(3,15,11,0.98)_100%)] p-0 shadow-[0_30px_120px_rgba(0,0,0,0.45)]"
         >
           <DialogTitle className="sr-only">
-            Imagen ampliada de la galeria
+            Imagen ampliada de la galería
           </DialogTitle>
 
           <button
@@ -171,7 +171,7 @@ export default function Gallery() {
               <div className="flex items-center justify-between gap-4 border-b border-white/10 px-6 py-5 pr-20 text-white">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.32em] text-[var(--color-brand-mint)]">
-                    Galeria Hogar Esperanza
+                    Galería Hogar Esperanza
                   </p>
                   <p className="mt-2 text-sm text-white/70 sm:text-base">
                     {selectedImage.alt}

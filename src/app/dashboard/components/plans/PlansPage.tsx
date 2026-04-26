@@ -163,7 +163,7 @@ export function PlansPage() {
           setEditingPlan(null);
           setIsCreateDialogOpen(true);
         }}
-        createButtonLabel="Crear Plan"
+        createButtonLabel="Crear plan"
       />
 
       <main className="p-6 lg:p-8">
@@ -186,23 +186,23 @@ export function PlansPage() {
             className="flex min-h-[400px] cursor-pointer flex-col items-center justify-center rounded-2xl border-2 border-dashed bg-gray-50 p-6"
           >
             <Plus className="h-8 w-8 text-gray-400" />
-            <h3>Crear Nuevo Plan</h3>
+            <h3>Crear nuevo plan</h3>
           </motion.div>
         </div>
 
         <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-3">
           <SummaryCard
-            title="Total de Planes"
+            title="Total de planes"
             value={plans.length}
             icon={CreditCard}
           />
           <SummaryCard
-            title="Total de Características"
+            title="Total de características"
             value={totalFeatures}
             icon={ListChecks}
           />
           <SummaryCard
-            title="Planes con Imagen"
+            title="Planes con imagen"
             value={plansWithImage}
             icon={ImageIcon}
           />
@@ -212,7 +212,7 @@ export function PlansPage() {
       <Dialog open={isCreateDialogOpen} onOpenChange={handleCloseDialog}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{editingPlan ? "Editar Plan" : "Crear Plan"}</DialogTitle>
+            <DialogTitle>{editingPlan ? "Editar plan" : "Crear plan"}</DialogTitle>
             <DialogDescription>
               {editingPlan
                 ? "Modifica los detalles del plan."

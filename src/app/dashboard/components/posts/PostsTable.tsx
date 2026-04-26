@@ -206,7 +206,7 @@ export function PostsTable({ searchQuery = '', onEdit }: PostsTableProps) {
           </h3>
 
           <p className="text-sm text-[#6E6E6E] mt-1">
-            Intenta con una busqueda diferente o crea un nuevo post.
+            Intenta con una búsqueda diferente o crea un nuevo post.
           </p>
         </div>
       )}

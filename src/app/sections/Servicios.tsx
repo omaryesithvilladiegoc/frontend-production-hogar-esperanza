@@ -249,7 +249,7 @@ export default function Servicios({
                                   transition={{ delay: 0.8 }}
                                   className="mt-6 px-6 py-3 bg-white text-emerald-700 font-semibold rounded-full z-50 cursor-pointer pointer-events-auto"
                                 >
-                                  Solicitar informacion
+                                  Solicitar información
                                 </motion.button>
                               </motion.div>
                             )}
@@ -345,7 +345,7 @@ export default function Servicios({
                           }}
                           className="w-full py-3 bg-white text-emerald-700 font-semibold rounded-full text-sm z-10 cursor-pointer pointer-events-auto"
                         >
-                          Solicitar informacion
+                          Solicitar información
                         </button>
                       </motion.div>
                     )}

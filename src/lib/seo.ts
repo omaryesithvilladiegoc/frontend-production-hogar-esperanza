@@ -1,6 +1,6 @@
 export const SITE_NAME = "Hogar Esperanza";
 export const SITE_DESCRIPTION =
-  "Hogar Esperanza brinda cuidado, compania y bienestar para adultos mayores, con programas, donaciones y contenido educativo para familias y cuidadores.";
+  "Hogar Esperanza brinda cuidado, compañía y bienestar para adultos mayores, con programas, donaciones y contenido educativo para familias y cuidadores.";
 export const DEFAULT_OG_IMAGE =
   "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1772863000/620429637_17932356405170762_5379083252956222494_n-removebg-preview_vl44qj.png";
 

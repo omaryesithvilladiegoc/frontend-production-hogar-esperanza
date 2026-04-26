@@ -11,14 +11,14 @@ import {
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    "Articulos y novedades sobre bienestar, cuidado y acompanamiento para adultos mayores en Hogar Esperanza.",
+    "Artículos y novedades sobre bienestar, cuidado y acompañamiento para adultos mayores en Hogar Esperanza.",
   alternates: {
     canonical: buildAbsoluteUrl("/blog"),
   },
   openGraph: {
     title: `Blog | ${SITE_NAME}`,
     description:
-      "Articulos y novedades sobre bienestar, cuidado y acompanamiento para adultos mayores en Hogar Esperanza.",
+      "Artículos y novedades sobre bienestar, cuidado y acompañamiento para adultos mayores en Hogar Esperanza.",
     url: buildAbsoluteUrl("/blog"),
     siteName: SITE_NAME,
     locale: "es_CO",
@@ -39,35 +39,34 @@ export default async function BlogPage() {
 
   if (!posts.length) {
     return (
-      <section className="mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-[#0d3b25] pt-30">
-        <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
+      <section className="mx-auto bg-[#0d3b25] px-4 py-8 pt-30 sm:px-6 lg:px-8">
+        <h1 className="mb-12 text-center text-4xl font-bold text-white md:text-5xl">
           La vida en Hogar Esperanza...
         </h1>
 
         <p className="text-center text-white/80">
-          Aun no hay publicaciones disponibles.
+          Aún no hay publicaciones disponibles.
         </p>
       </section>
     );
   }
 
   return (
-    <section className=" mx-auto  px-4 sm:px-6 lg:px-8 py-8 bg-[#0d3b25] pt-30">
-
-      <h1 className="text-4xl md:text-5xl font-bold text-white text-center mb-12">
+    <section className="mx-auto bg-[#0d3b25] px-4 py-8 pt-30 sm:px-6 lg:px-8">
+      <h1 className="mb-12 text-center text-4xl font-bold text-white md:text-5xl">
         La vida en Hogar Esperanza...
       </h1>
 
-      <p className="max-w-3xl mx-auto text-center text-white/80 mb-10">
-        Descubre articulos, consejos y novedades sobre cuidado, bienestar y
-        acompanamiento para adultos mayores y sus familias.
+      <p className="mx-auto mb-10 max-w-3xl text-center text-white/80">
+        Descubre artículos, consejos y novedades sobre cuidado, bienestar y
+        acompañamiento para adultos mayores y sus familias.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-6 auto-rows-[280px]">
+      <div className="grid auto-rows-[280px] grid-cols-1 gap-6 md:grid-cols-12">
         {posts.map((post) => (
           <article
             key={post.id}
-            className="relative rounded-3xl overflow-hidden group md:col-span-6 lg:col-span-4"
+            className="group relative overflow-hidden rounded-3xl md:col-span-6 lg:col-span-4"
             style={{
               gridColumn: `span ${Math.min(Math.max(post.size, 1), 12)} / span ${Math.min(Math.max(post.size, 1), 12)}`,
             }}
@@ -76,39 +75,38 @@ export default async function BlogPage() {
               <span className="sr-only">Leer {post.title}</span>
             </Link>
             <Image
-              src={post.image || "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1772863000/620429637_17932356405170762_5379083252956222494_n-removebg-preview_vl44qj.png"}
+              src={
+                post.image ||
+                "https://res.cloudinary.com/dbzbkk9l6/image/upload/v1772863000/620429637_17932356405170762_5379083252956222494_n-removebg-preview_vl44qj.png"
+              }
               alt={post.title}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-110"
             />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"/>
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
             <div className="absolute bottom-0 p-6">
-              <p className="text-xs uppercase tracking-[0.2em] text-white/70 mb-2">
+              <p className="mb-2 text-xs uppercase tracking-[0.2em] text-white/70">
                 {new Date(post.createdAt).toLocaleDateString("es-CO")}
               </p>
 
-              <h2 className="text-xl md:text-2xl font-bold text-white mb-2">
+              <h2 className="mb-2 text-xl font-bold text-white md:text-2xl">
                 <Link href={`/blog/${post.id}`}>{post.title}</Link>
               </h2>
 
-              <p className="text-white/90 text-sm">
-                {post.subtitle}
-              </p>
+              <p className="text-sm text-white/90">{post.subtitle}</p>
             </div>
           </article>
         ))}
-
       </div>
 
-      <div className="flex justify-center mt-12">
-        <button className="px-10 py-3 border-2 border-white text-white rounded-full hover:bg-white hover:text-emerald-800 transition-all">
+      <div className="mt-12 flex justify-center">
+        <button className="rounded-full border-2 border-white px-10 py-3 text-white transition-all hover:bg-white hover:text-emerald-800">
           Ver más +
         </button>
       </div>
-
     </section>
   );
 }

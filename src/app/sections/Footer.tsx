@@ -10,20 +10,20 @@ import {
 } from "@/lib/contact";
 
 const menuLinks = [
-  { label: "Quienes somos", href: "#quienes-somos" },
+  { label: "Quiénes somos", href: "#quienes-somos" },
   { label: "Planes", href: "#servicios" },
   { label: "Instalaciones", href: "#instalaciones" },
-  { label: "Se parte de una historia", href: "#como-ayudar" },
-  { label: "Contactanos", href: "#contactanos" },
-  { label: "Galeria", href: "#blog" },
+  { label: "Sé parte de una historia", href: "#como-ayudar" },
+  { label: "Contáctanos", href: "#contactanos" },
+  { label: "Galería", href: "#blog" },
   { label: "Blog", href: "#" },
 ];
 
 const politicasLinks = [
-  { label: "Politicas de privacidad", href: "#" },
-  { label: "Terminos y condiciones", href: "#" },
-  { label: "Terminos de uso", href: "#" },
-  { label: "Politicas de Cookies", href: "#" },
+  { label: "Políticas de privacidad", href: "#" },
+  { label: "Términos y condiciones", href: "#" },
+  { label: "Términos de uso", href: "#" },
+  { label: "Políticas de cookies", href: "#" },
 ];
 
 export default function Footer() {
@@ -71,7 +71,7 @@ export default function Footer() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h4 className="mb-4 text-lg font-semibold text-white">Menu</h4>
+              <h4 className="mb-4 text-lg font-semibold text-white">Menú</h4>
               <ul className="space-y-2">
                 {menuLinks.map((link) => (
                   <li key={link.label}>
@@ -95,7 +95,7 @@ export default function Footer() {
             >
               <div>
                 <h4 className="mb-4 text-lg font-semibold text-white">
-                  Politicas
+                  Políticas
                 </h4>
                 <ul className="space-y-2">
                   {politicasLinks.map((link) => (
@@ -118,7 +118,7 @@ export default function Footer() {
                 <ul className="space-y-2 text-sm text-white/80">
                   <li>Calle 24 # 15 - 90</li>
                   <li>Barrio Costa de Oro</li>
-                  <li>Monteria, Cordoba, Colombia</li>
+                  <li>Montería, Córdoba, Colombia</li>
                   <li>
                     <a
                       href={WHATSAPP_DONATION_URL}
@@ -142,7 +142,7 @@ export default function Footer() {
             className="border-t border-white/20 pt-6 text-center"
           >
             <p className="text-sm text-white/70">
-              Copyright © 2026 Fundacion Hogar Esperanza. Todos los derechos
+              Copyright © 2026 Fundación Hogar Esperanza. Todos los derechos
               reservados.
             </p>
           </motion.div>
