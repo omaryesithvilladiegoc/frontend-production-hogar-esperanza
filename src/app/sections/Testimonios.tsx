@@ -245,49 +245,59 @@ export default function Testimonios() {
       <AnimatePresence>
         {selected && (
           <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
-            <DialogContent className="max-w-2xl rounded-[2rem] border border-emerald-100 bg-white/95 p-0 backdrop-blur">
-              <div className="grid gap-0 md:grid-cols-[0.95fr_1.05fr]">
-                <div className="relative max-h-[320px]">
+            {/* Ajustado max-w-4xl para más ancho y overflow-hidden para los bordes redondeados */}
+            <DialogContent className="max-w-4xl overflow-hidden rounded-[2rem] border border-emerald-100 bg-white p-0 shadow-2xl">
+              <div className="grid h-full max-h-[90vh] grid-cols-1 md:grid-cols-[40%_60%]">
+                {/* Contenedor de Imagen optimizado */}
+                <div className="relative min-h-[300px] w-full md:min-h-[500px]">
                   <Image
                     src={selected.image}
                     alt={selected.name}
                     fill
+                    priority
                     sizes="(max-width: 768px) 100vw, 40vw"
-                    className="rounded-t-[2rem] object-cover md:rounded-l-[2rem] md:rounded-tr-none"
+                    className="object-cover"
                   />
                 </div>
 
-                <DialogHeader className="flex h-full flex-col p-6 text-left sm:p-8">
-                  <DialogTitle className="text-3xl text-emerald-700">
-                    {selected.name}
-                  </DialogTitle>
+                {/* Contenedor de Texto con scroll independiente si es necesario */}
+                <div className="flex flex-col overflow-y-auto bg-white p-8 md:p-10">
+                  <DialogHeader className="mb-6">
+                    <DialogTitle className="text-4xl font-bold text-emerald-800">
+                      {selected.name}
+                    </DialogTitle>
+                    <p className="mt-2 text-lg italic leading-relaxed text-emerald-600/80">
+                      &ldquo;{selected.quote}&rdquo;
+                    </p>
+                  </DialogHeader>
 
                   <DialogDescription asChild>
-                    <div className="mt-4 flex h-full flex-col">
-                      <p className="mb-5 text-base italic leading-7 text-emerald-900/75">
-                        &ldquo;{selected.quote}&rdquo;
-                      </p>
+                    <div className="flex flex-col space-y-6">
+                      <div className="space-y-4">
+                        {/* El texto ahora tiene espacio para respirar */}
+                        <p className="text-base leading-8 text-gray-700 md:text-lg">
+                          {selected.story}
+                        </p>
+                      </div>
 
-                      <p className="text-sm leading-7 text-gray-700 sm:text-base">
-                        {selected.story}
-                      </p>
-
-                      <button
-                        type="button"
-                        onClick={() =>
-                          openWhatsApp(
-                            buildWhatsAppMessageUrl(
-                              `Hola, quiero apoyar a ${selected.name}.`,
-                            ),
-                          )
-                        }
-                        className="mt-6 w-fit rounded-full bg-emerald-600 px-5 py-3 text-sm font-semibold text-white transition-colors hover:bg-emerald-700"
-                      >
-                        Apoya a {selected.name}
-                      </button>
+                      <div className="pt-4">
+                        <button
+                          type="button"
+                          onClick={() =>
+                            openWhatsApp(
+                              buildWhatsAppMessageUrl(
+                                `Hola, quiero apoyar a ${selected.name}.`,
+                              ),
+                            )
+                          }
+                          className="inline-flex items-center justify-center rounded-full bg-emerald-600 px-8 py-4 text-base font-bold text-white shadow-lg transition-all hover:bg-emerald-700 hover:shadow-emerald-200 active:scale-95"
+                        >
+                          Apoya a {selected.name}
+                        </button>
+                      </div>
                     </div>
                   </DialogDescription>
-                </DialogHeader>
+                </div>
               </div>
             </DialogContent>
           </Dialog>
