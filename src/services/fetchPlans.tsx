@@ -14,6 +14,16 @@ const getBackendUrl = () => {
 
 const getToken = async () => cookies.get("token") || "";
 
+const createTimeoutSignal = (timeoutMs: number) => {
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+  return {
+    signal: controller.signal,
+    clear: () => clearTimeout(timeoutId),
+  };
+};
+
 type PlanArchiveResponse = {
   success: boolean;
   id: string;
@@ -37,6 +47,8 @@ const parsePlanError = async (response: Response, fallbackMessage: string) => {
 };
 
 export const FfetchPlans = async (): Promise<Plan[]> => {
+  const timeout = createTimeoutSignal(5000);
+
   try {
     const backendUrl = getBackendUrl();
     const response = await fetch(`${backendUrl}/plans`, {
@@ -44,6 +56,7 @@ export const FfetchPlans = async (): Promise<Plan[]> => {
       headers: {
         "Content-Type": "application/json",
       },
+      signal: timeout.signal,
       ...getPublicFetchOptions(["plans"]),
     });
 
@@ -54,6 +67,8 @@ export const FfetchPlans = async (): Promise<Plan[]> => {
     return await response.json();
   } catch {
     return [];
+  } finally {
+    timeout.clear();
   }
 };
 
