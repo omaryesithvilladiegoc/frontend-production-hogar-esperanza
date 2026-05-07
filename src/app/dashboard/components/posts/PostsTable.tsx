@@ -29,13 +29,19 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { usePostsContext } from '@/app/context/posts';
 import { IPost } from '@/interfaces/interfaces';
+import { ChatGptIcon } from '@/components/icons/ChatGptIcon';
 
 interface PostsTableProps {
   searchQuery?: string;
   onEdit?: (post: IPost) => void;
+  onGenerate?: (post: IPost) => void;
 }
 
-export function PostsTable({ searchQuery = '', onEdit }: PostsTableProps) {
+export function PostsTable({
+  searchQuery = '',
+  onEdit,
+  onGenerate,
+}: PostsTableProps) {
   const { posts, deletePost, isLoading } = usePostsContext();
 
   const filteredPosts = posts.filter(
@@ -171,6 +177,14 @@ export function PostsTable({ searchQuery = '', onEdit }: PostsTableProps) {
                       >
                         <Edit className="w-4 h-4" />
                         Editar
+                      </DropdownMenuItem>
+
+                      <DropdownMenuItem
+                        className="cursor-pointer gap-2"
+                        onClick={() => onGenerate?.(post)}
+                      >
+                        <ChatGptIcon className="w-4 h-4" />
+                        Generar texto
                       </DropdownMenuItem>
 
                       <DropdownMenuItem

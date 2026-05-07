@@ -73,7 +73,7 @@ export default function RootLayout({
               duration: 4000,
             }}
           />
-          <ParentComponent color="#0d3b25">
+          <ParentComponent  color="#0d3b25">
             <Footer />
           </ParentComponent>
         </body>

@@ -114,7 +114,7 @@ export default function Testimonios() {
             className="mb-12 flex flex-col items-center gap-4 text-center md:mb-16"
           >
             <h2 className="text-3xl font-bold text-white md:text-4xl lg:text-5xl">
-              Se parte de una historia
+              Sé parte de una historia
             </h2>
 
             <p className="mx-auto max-w-xl text-base text-white/80 md:text-lg">
@@ -246,7 +246,7 @@ export default function Testimonios() {
         {selected && (
           <Dialog open={!!selected} onOpenChange={() => setSelected(null)}>
             {/* Ajustado max-w-4xl para más ancho y overflow-hidden para los bordes redondeados */}
-            <DialogContent className="max-w-4xl overflow-hidden rounded-[2rem] border border-emerald-100 bg-white p-0 shadow-2xl">
+            <DialogContent className="overflow-hidden rounded-[2rem] border border-emerald-100 bg-white p-0 shadow-2xl">
               <div className="grid h-full max-h-[90vh] grid-cols-1 md:grid-cols-[40%_60%]">
                 {/* Contenedor de Imagen optimizado */}
                 <div className="relative min-h-[300px] w-full md:min-h-[500px]">

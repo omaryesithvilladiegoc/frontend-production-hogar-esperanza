@@ -5,6 +5,8 @@ import { PostsTable } from './PostsTable'
 import { usePostsContext } from '@/app/context/posts'
 import { IPost } from '@/interfaces/interfaces'
 import { toast } from 'sonner'
+import { ChatGptIcon } from '@/components/icons/ChatGptIcon'
+import { FgeneratePostContent } from '@/services/generatePostContent'
 
 import {
   Dialog,
@@ -55,6 +57,8 @@ export function PostsPage() {
   const [isCreateDialogOpen, setIsCreateDialogOpen] = useState(false)
   const [editingPost, setEditingPost] = useState<IPost | null>(null)
   const [form, setForm] = useState<PostFormState>(emptyForm)
+  const [generationTopic, setGenerationTopic] = useState('')
+  const [isGenerating, setIsGenerating] = useState(false)
   const [mainImage, setMainImage] = useState<File | null>(null)
   const [extraImages, setExtraImages] = useState<File[]>([])
   const [existingExtraImages, setExistingExtraImages] = useState<string[]>([])
@@ -64,6 +68,7 @@ export function PostsPage() {
   const openCreateDialog = () => {
     setEditingPost(null)
     setForm(emptyForm)
+    setGenerationTopic('')
     setMainImage(null)
     setExtraImages([])
     setExistingExtraImages([])
@@ -73,6 +78,7 @@ export function PostsPage() {
   const openEditDialog = (post: IPost) => {
     setEditingPost(post)
     setForm(mapPostToForm(post))
+    setGenerationTopic(post.title)
     setMainImage(null)
     setExtraImages([])
     setExistingExtraImages(post.extraImages)
@@ -83,9 +89,15 @@ export function PostsPage() {
     setIsCreateDialogOpen(false)
     setEditingPost(null)
     setForm(emptyForm)
+    setGenerationTopic('')
     setMainImage(null)
     setExtraImages([])
     setExistingExtraImages([])
+  }
+
+  const openGenerateDialog = async (post: IPost) => {
+    openEditDialog(post)
+    await handleGeneratePost(post, post.title)
   }
 
   const handleChange = (field: keyof PostFormState, value: string) => {
@@ -113,6 +125,50 @@ export function PostsPage() {
       .map((keyword) => keyword.trim())
       .filter(Boolean),
     size: Number(form.size),
+  }
+
+  const buildCurrentPostPayload = (sourceForm: PostFormState) => ({
+    title: sourceForm.title.trim(),
+    subtitle: sourceForm.subtitle.trim(),
+    header: sourceForm.header.trim(),
+    mainContent: sourceForm.mainContent.trim(),
+    footer: sourceForm.footer.trim(),
+    keywords: sourceForm.keywords
+      .split(',')
+      .map((keyword) => keyword.trim())
+      .filter(Boolean),
+    size: Number(sourceForm.size),
+  })
+
+  const handleGeneratePost = async (postContext?: IPost, topicOverride?: string) => {
+    setIsGenerating(true)
+
+    try {
+      const sourceForm = postContext ? mapPostToForm(postContext) : form
+      const generated = await FgeneratePostContent({
+        topic: topicOverride ?? generationTopic,
+        currentPost: buildCurrentPostPayload(sourceForm),
+      })
+
+      setForm({
+        title: generated.title,
+        subtitle: generated.subtitle,
+        header: generated.header,
+        mainContent: generated.mainContent,
+        footer: generated.footer,
+        keywords: generated.keywords.join(', '),
+        size: String(generated.size),
+      })
+      toast.success('Texto generado correctamente')
+    } catch (error) {
+      const message =
+        error instanceof Error
+          ? error.message
+          : 'No se pudo generar el texto del post'
+      toast.error(message)
+    } finally {
+      setIsGenerating(false)
+    }
   }
 
   const removeExistingExtraImage = (imageUrl: string) => {
@@ -166,7 +222,11 @@ export function PostsPage() {
       />
 
       <main className="p-6 lg:p-8">
-        <PostsTable searchQuery={searchQuery} onEdit={openEditDialog} />
+        <PostsTable
+          searchQuery={searchQuery}
+          onEdit={openEditDialog}
+          onGenerate={(post) => void openGenerateDialog(post)}
+        />
       </main>
 
       <Dialog open={isCreateDialogOpen} onOpenChange={(open) => !open && closeDialog()}>
@@ -183,6 +243,38 @@ export function PostsPage() {
           </DialogHeader>
 
           <div className="space-y-5 py-4">
+            <div className="rounded-lg border border-[#E8E1D4] bg-[#FFFCF7] p-4 space-y-3">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                <div className="flex-1">
+                  <Label>Idea para IA</Label>
+                  <textarea
+                    rows={3}
+                    className="w-full border rounded-lg p-3 text-sm"
+                    placeholder="Ej: cuidados para prevenir caidas en adultos mayores, comidas suaves y nutritivas, actividades para mejorar el animo..."
+                    value={generationTopic}
+                    onChange={(e) => setGenerationTopic(e.target.value)}
+                  />
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => void handleGeneratePost()}
+                  disabled={isGenerating}
+                  className="border-[#D4A03A] text-[#8A6824] hover:bg-[#FFF4D8]"
+                >
+                  <ChatGptIcon className="w-4 h-4 mr-2" />
+                  {isGenerating ? 'Generando...' : 'Generar texto'}
+                </Button>
+
+              </div>
+
+              <p className="text-xs text-[#6E6E6E]">
+                Genera titulo, subtitulo, header, contenido, footer, keywords,
+                y tamano. Las imagenes se agregan manualmente.
+              </p>
+            </div>
+
             <div>
               <Label>Titulo</Label>
               <Input

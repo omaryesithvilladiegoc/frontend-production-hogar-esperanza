@@ -33,7 +33,7 @@ export default function Footer() {
 
   return (
     <footer
-      className={`relative z-20 rounded-t-[4rem] bg-[#15803D] pb-6 pt-16 ${
+      className={`relative z-20 rounded-t-[4rem]  bg-[#15803D] pb-6 pt-16 ${
         path === "/login" ? "translate-y-[-120px]" : ""
       }`}
     >
